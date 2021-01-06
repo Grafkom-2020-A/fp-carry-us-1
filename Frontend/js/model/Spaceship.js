@@ -5,8 +5,11 @@ class Spaceship {
         const loader = new GLTFLoader();
         this.body = null;
         this.camera = camera;
-        this.Z_ROTATION_BOOST = 0.0001;
-        this.Z_ROTATION_RECOVERY = 0.00005;
+        this.Z_ROTATION_BOOST = 0.000025;
+        this.Z_ROTATION_RECOVERY = 0.001;
+        this.X_MOVE = 0.01;
+        this.Y_MOVE = 0.01;
+        this.time = new Date().getTime();
 
         loader.load( '../../assets/spaceship/spaceship.glb', function ( gltf ) {
             this.body = gltf.scene;
@@ -26,18 +29,17 @@ class Spaceship {
         this.camera.camera.lookAt(this.body.position);
 
         if(horizontal != 0) {
-            this.body.rotation.z += this.Z_ROTATION_BOOST * (horizontal / 0.01);
+            this.body.rotation.z += this.Z_ROTATION_BOOST * (horizontal / this.X_MOVE);
+        }
+
+        if(vertical != 0) {
+            this.body.rotation.x += this.Z_ROTATION_BOOST * (vertical / this.Y_MOVE);
         }
     }
 
     recovery(vertical, horizontal) {
-        while (this.body.rotation.z != 0 ) {
-            this.body.rotation.z += horizontal;
-        }
-
-        while (this.body.rotation.y != 0) {
-            this.body.rotation.y += vertical;
-        } 
+        this.body.rotation.z += horizontal;
+        this.body.rotation.x += vertical;
     }
 
     render() {
@@ -46,19 +48,19 @@ class Spaceship {
             let horizontal = 0;
             switch (e.key) {
                 case 'a':
-                    horizontal = -0.01;
+                    horizontal = -this.X_MOVE;
                     this.move(vertical, horizontal);
                     break;
                 case 'd':
-                    horizontal = 0.01;
+                    horizontal = this.X_MOVE;
                     this.move(vertical, horizontal);
                     break;
                 case 'w':
-                    vertical = 0.01;
+                    vertical = this.Y_MOVE;
                     this.move(vertical, horizontal);
                     break;
                 case 's':
-                    vertical = -0.01;
+                    vertical = -this.Y_MOVE;
                     this.move(vertical, horizontal);
                     break;
                 case ' ':
@@ -66,22 +68,13 @@ class Spaceship {
             }
         }.bind(this));
 
-        document.addEventListener('onkeyup', function (e) {
-            switch (e.key) {
-                case 'a':
-                    this.recovery(0, this.Z_ROTATION_RECOVERY);
-                    break;
-                case 'd':
-                    this.recovery(0, this.Z_ROTATION_RECOVERY * -1);
-                    break;
-                case 'w':
-                    break;
-                case 's':
-                    break;
-                case ' ':
-                    break;
-            }
-        }.bind(this));
+        if(this.body != null && this.time - new Date().getTime() < 1000) {
+            if(this.body.rotation.z > 0.0) this.recovery(0, this.Z_ROTATION_RECOVERY * -1);
+            else if(this.body.rotation.z < 0.0) this.recovery(0, this.Z_ROTATION_RECOVERY);
+            else if(this.body.rotation.x > 0.0) this.recovery(this.Z_ROTATION_RECOVERY * -1, 0);
+            else if(this.body.rotation.x < 0.0) this.recovery(this.Z_ROTATION_RECOVERY, 0);
+            if(this.body.rotation.z == 0.0 && this.body.rotation.y == 0) this.time = new Date().getTime();
+        }
     }
 }
 
