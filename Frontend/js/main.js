@@ -25,9 +25,10 @@ window.addEventListener('resize', function(){
   camera.camera.updateProjectionMatrix()
 })
 
+spaceship.render();
+
 var animate = function () {
   requestAnimationFrame( animate );
-  spaceship.render();
   renderer.render( scene, camera.camera );
 };
 
