@@ -5,7 +5,7 @@ import { Spaceship } from './model/Spaceship.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();
-let camera = new Camera(scene);
+let camera = new Camera();
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 
