@@ -24,65 +24,41 @@ class Spaceship {
         }.bind(this));
     }
 
-    move(vertical, horizontal) {
+    move(vertical, horizontal, boost) {
         this.body.rotateX(vertical);
         this.body.rotateY(horizontal);
-        this.body.translateZ((vertical != 0 || horizontal != 0)?this.Z_TRANSLATION:this.Z_TRANSLATION_BOOST);
-
-        let z_rotation = parseFloat(this.body.rotation.z).toFixed(2);
-
-        if(horizontal != 0 && z_rotation < 0.25 && z_rotation > -0.25) {
-            this.body.rotateZ(this.Z_ROTATION_BOOST * -(horizontal/this.X_ROTATION));
-        }
+        this.body.translateZ(boost);
 
         this.camera.camera.lookAt(this.body.position);
-    }
-
-    recovery() {
-        if(parseFloat(this.body.rotation.z).toFixed(2) != 0.00) {
-            let interval_id = setInterval(() => {
-                let z_rotation = parseFloat(this.body.rotation.z).toFixed(2);
-
-                if (z_rotation < 0) this.body.rotateZ(this.Z_ROTATION_RECOVERY);
-                else if(z_rotation > 0) this.body.rotateZ(-this.Z_ROTATION_RECOVERY);
-
-                if(z_rotation == 0.00) {
-                    this.body.rotation.z = 0;
-                    clearInterval(interval_id);
-                }
-            }, 100);
-        }
     }
 
     render() {
         document.addEventListener('keydown', function (e) {
             let vertical = 0;
             let horizontal = 0;
+            let boost = 0;
             switch (e.key) {
                 case 'a':
                     horizontal = this.X_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
                 case 'd':
                     horizontal = -this.X_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
                 case 'w':
                     vertical = -this.Y_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
                 case 's':
                     vertical = this.Y_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
                 case ' ':
-                    this.move(vertical, horizontal);
+                    boost = this.Z_TRANSLATION;
+                    this.move(vertical, horizontal, boost);
                     break;
             }
-        }.bind(this));
-
-        document.addEventListener('keyup', function(e) {
-            this.recovery();
         }.bind(this));
     }
 }
