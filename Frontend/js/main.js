@@ -26,6 +26,7 @@ window.addEventListener('resize', function(){
 })
 
 spaceship.render();
+camera.render();
 
 var animate = function () {
   requestAnimationFrame( animate );
