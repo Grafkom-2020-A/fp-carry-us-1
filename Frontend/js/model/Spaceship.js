@@ -3,7 +3,6 @@ import { Camera } from '../utils/Camera.js';
 
 class Spaceship {
     constructor(scene, camera) {
-        const loader = new GLTFLoader();
         this.body;
         this.camera = camera;
         this.Z_TRANSLATION_BOOST = 50;
@@ -11,6 +10,11 @@ class Spaceship {
         this.Y_ROTATION = 0.01;
         this.camera_position = null;
         this.is_stand_by = false;
+        this.load(scene);
+    }
+
+    load(scene) {
+        const loader = new GLTFLoader();
 
         loader.load( '../../assets/spaceship/spaceship.glb', function ( gltf ) {
             this.body = gltf.scene;
