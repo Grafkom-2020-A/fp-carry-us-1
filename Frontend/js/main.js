@@ -2,12 +2,14 @@ import * as THREE from './lib/three.js';
 import { Background } from './utils/Background.js';
 import { Camera } from './utils/Camera.js';
 import { Spaceship } from './model/Spaceship.js';
+import { Planet } from './model/Planet.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();
 let camera = new Camera();
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
+let sun = new Planet(scene, '../../assets/space_objects/Sun.glb');
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -26,10 +28,12 @@ window.addEventListener('resize', function(){
 })
 
 spaceship.render();
+// sun.render();
 camera.render();
 
 var animate = function () {
   requestAnimationFrame( animate );
+  sun.animate()
   renderer.render( scene, camera.camera );
 };
 
