@@ -21,7 +21,7 @@ class Spaceship {
     }
 
     move(vertical, horizontal, boost) {
-        if(this.is_stand_by) {
+        if(!this.is_stand_by) {
             this.body.rotateX(vertical);
             this.body.rotateY(horizontal);
             this.body.translateZ(boost);
@@ -87,7 +87,7 @@ class Spaceship {
                     vertical = this.Y_ROTATION;
                     this.move(vertical, horizontal, boost);
                     break;
-                case ' ':
+                case 'Shift':
                     boost = this.Z_TRANSLATION_BOOST;
                     this.move(vertical, horizontal, boost);
                     break;
