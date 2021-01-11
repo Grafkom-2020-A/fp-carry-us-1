@@ -5,7 +5,7 @@ class Spaceship {
     constructor(scene, camera) {
         this.body;
         this.camera = camera;
-        this.Z_TRANSLATION_BOOST = 50;
+        this.Z_TRANSLATION_BOOST = 10;
         this.X_ROTATION = 0.01;
         this.Y_ROTATION = 0.01;
         this.camera_position = null;
