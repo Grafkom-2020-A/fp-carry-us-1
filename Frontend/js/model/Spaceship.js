@@ -75,24 +75,24 @@ class Spaceship {
             let vertical = 0;
             let horizontal = 0;
             let boost = 0;
-            switch (e.key) {
-                case 'a':
+            switch (e.keyCode) {
+                case 65: // A
                     horizontal = this.X_ROTATION;
                     this.move(vertical, horizontal, boost);
                     break;
-                case 'd':
+                case 68: // D
                     horizontal = -this.X_ROTATION;
                     this.move(vertical, horizontal, boost);
                     break;
-                case 'w':
+                case 87: // W
                     vertical = -this.Y_ROTATION;
                     this.move(vertical, horizontal, boost);
                     break;
-                case 's':
+                case 83: // S
                     vertical = this.Y_ROTATION;
                     this.move(vertical, horizontal, boost);
                     break;
-                case 'Shift':
+                case 32: // Spacebar
                     boost = this.Z_TRANSLATION_BOOST;
                     this.move(vertical, horizontal, boost);
                     break;
