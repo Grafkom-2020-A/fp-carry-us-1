@@ -6,7 +6,7 @@ import { Planet } from './model/Planet.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();
-let camera = new Camera();
+let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 let sun = new Planet(scene, '../../assets/space_objects/Sun.glb');
