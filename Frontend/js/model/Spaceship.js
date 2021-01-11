@@ -92,7 +92,7 @@ class Spaceship {
                     vertical = this.Y_ROTATION;
                     this.move(vertical, horizontal, boost);
                     break;
-                case 16: // Shift
+                case 32: // Shift
                     boost = this.Z_TRANSLATION_BOOST;
                     this.move(vertical, horizontal, boost);
                     break;
