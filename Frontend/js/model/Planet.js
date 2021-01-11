@@ -4,7 +4,7 @@ class Planet
 {
   constructor(scene, glbPath)
   {
-    this.body;
+    this.mesh;
     this.path = glbPath
     this.X_ROTATION = 0.01;
     this.Y_ROTATION = 0.01;
@@ -15,10 +15,9 @@ class Planet
     const loader = new GLTFLoader();
 
     loader.load( this.path, function ( gltf ) {
-        this.body = gltf.scene;
-        scene.add( this.body );
-        this.body.position.set(0, 0, 0);
-        this.initCamera();
+        this.mesh = gltf.scene.children[0];
+        scene.add( this.mesh );
+        this.mesh.position.set(0, 0, -10);
     }.bind(this));
   }
 
@@ -29,7 +28,7 @@ class Planet
 
   animate()
   {
-    // this.body.rotateY(-0.3*Math.PI);
+    // this.mesh.rotation.y += 0.01
     // this.setPosition(0, 0, -100)
   }
 }
