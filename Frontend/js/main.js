@@ -76,6 +76,32 @@ scene.add(light2,pointLightHelper);
 /***************** End Lighting *****************/
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
+//----------------- GROUP ------------//
+
+// let then = 0
+// let now = 1
+// function planetRevolution()
+// {
+//     now *= 0.1  // make it seconds
+
+//     const delta = now - then
+//     then = now
+
+//     mars.setPosition(Math.cos(delta) * 450, 0, Math.sin(delta) * 450)
+
+//     // mars.position.z=Math.sin(delta) * 100
+
+// }
+
+var group = new THREE.Group()
+
+setTimeout(function()
+{
+  group.add(sun.getBody(), mercury.getBody())
+  scene.add(group)
+}, 1000)
+
+/***************** END GROUP ***************/
 
 window.addEventListener('resize', function(){
   renderer.setSize( window.innerWidth, window.innerHeight )
@@ -89,6 +115,8 @@ camera.render();
 var animate = function ()
 {
   requestAnimationFrame( animate );
+  // if(sun) setTimeout(function(){sun.animate()}, 0)
+
   if(sun) sun.animate()
   if(mercury) mercury.animate()
   if(venus) venus.animate()
@@ -100,6 +128,10 @@ var animate = function ()
   if(uranus) uranus.animate()
   if(neptunus) neptunus.animate()
   if(pluto) pluto.animate()
+
+
+  if(group) setTimeout(function(){group.rotation.y += 0.01}, 1000)
+
   renderer.render( scene, camera.camera );
 };
 

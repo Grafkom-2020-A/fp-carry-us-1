@@ -8,6 +8,7 @@ class Planet
     this.path = glbPath
     this.X_ROTATION = 0.01;
     this.Y_ROTATION = 0.01;
+    this.is_revoluting = true
     this.load(scene)
   }
 
@@ -29,7 +30,17 @@ class Planet
     this.body = gltf.scene;
     scene.add( this.body );
     this.body.position.z = -10;
-}
+  }
+
+  setRevolutionStatus(status)
+  {
+    this.is_revoluting = status
+  }
+
+  getRevolutionStatus()
+  {
+    return this.is_revoluting
+  }
 
   setPosition(x,y,z) 
   {
@@ -39,6 +50,11 @@ class Planet
   setSize(size)
   {
     this.body.scale.set(size, size, size)
+  }
+
+  getBody()
+  {
+    return this.body
   }
   
   animate()
