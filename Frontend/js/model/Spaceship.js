@@ -20,7 +20,7 @@ class Spaceship {
             this.body = gltf.scene;
             scene.add( this.body );
             this.body.position.set(100, 0, 100);
-            this.body.scale.set(0.8,0.8,0.8)
+            this.body.scale.set(0.1, 0.1, 0.1)
             this.initCamera();
         }.bind(this));
     }
@@ -38,7 +38,7 @@ class Spaceship {
     initCamera() {
         this.camera.camera.position.z = this.body.position.z - 450;
         this.camera.camera.position.y = this.body.position.y + 100;
-        this.camera.camera.position.x = this.body.position.x - 100;
+        // this.camera.camera.position.x = this.body.position.x - 100;
         this.body.add(this.camera.camera);
         this.camera.camera.lookAt(this.body.position);
     }

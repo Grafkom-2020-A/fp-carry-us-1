@@ -35,11 +35,15 @@ class Planet
   {
     this.body.position.set(x, y, z);
   }
-
+  
+  setSize(size)
+  {
+    this.body.scale.set(size, size, size)
+  }
+  
   animate()
   {
     this.body.rotation.y += 0.01
-    // this.setPosition(0, 0, -100)
   }
 }
 
