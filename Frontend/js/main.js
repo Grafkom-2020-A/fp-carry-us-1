@@ -11,18 +11,18 @@ let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 
-let sun = new Planet(scene, '../../assets/space_objects/Sun.glb');
+let sun = new Planet('../../assets/space_objects/Sun.glb');
 
-let mercury = new Planet(scene, '../../assets/space_objects/Mercury.glb');
-let venus = new Planet(scene, '../../assets/space_objects/Venus.glb');
-let earth = new Planet(scene, '../../assets/space_objects/Earth.glb');
-let moon = new Planet(scene, '../../assets/space_objects/Moon.glb');
-let mars = new Planet(scene, '../../assets/space_objects/Mars.glb');
-let jupiter = new Planet(scene, '../../assets/space_objects/Jupiter.glb');
-let saturnus = new Planet(scene, '../../assets/space_objects/Saturn.glb');
-let uranus = new Planet(scene, '../../assets/space_objects/Uranus.glb');
-let neptunus = new Planet(scene, '../../assets/space_objects/Neptune.glb');
-let pluto = new Planet(scene, '../../assets/space_objects/Pluto.glb');
+let mercury = new Planet('../../assets/space_objects/Mercury.glb');
+let venus = new Planet('../../assets/space_objects/Venus.glb');
+let earth = new Planet('../../assets/space_objects/Earth.glb');
+// let moon = new Planet('../../assets/space_objects/Moon.glb');
+let mars = new Planet('../../assets/space_objects/Mars.glb');
+let jupiter = new Planet('../../assets/space_objects/Jupiter.glb');
+let saturnus = new Planet('../../assets/space_objects/Saturn.glb');
+let uranus = new Planet('../../assets/space_objects/Uranus.glb');
+let neptunus = new Planet('../../assets/space_objects/Neptune.glb');
+let pluto = new Planet('../../assets/space_objects/Pluto.glb');
 
 
 setInterval(function(){ 
@@ -93,12 +93,46 @@ var controls = new OrbitControls(camera.camera, renderer.domElement)
 
 // }
 
-var group = new THREE.Group()
+var revMercury = new THREE.Group()
+var revVenus = new THREE.Group()
+var revBumi = new THREE.Group()
+var revMars = new THREE.Group()
+var revJupiter = new THREE.Group()
+var revSaturnus = new THREE.Group()
+var revUranus = new THREE.Group()
+var revNeptunus = new THREE.Group()
+var revPluto = new THREE.Group()
 
 setTimeout(function()
 {
-  group.add(sun.getBody(), mercury.getBody())
-  scene.add(group)
+  revMercury.add(sun.getBody(), mercury.getBody())
+  scene.add(revMercury)
+
+  revVenus.add(sun.getBody(), venus.getBody())
+  scene.add(revVenus)
+
+  revBumi.add(sun.getBody(), earth.getBody())
+  scene.add(revBumi)
+
+  revMars.add(sun.getBody(), mars.getBody())
+  scene.add(revMars)
+
+  revJupiter.add(sun.getBody(), jupiter.getBody())
+  scene.add(revJupiter)
+
+  revSaturnus.add(sun.getBody(), saturnus.getBody())
+  scene.add(revSaturnus)
+
+  revUranus.add(sun.getBody(), uranus.getBody())
+  scene.add(revUranus)
+
+  revNeptunus.add(sun.getBody(), neptunus.getBody())
+  scene.add(revNeptunus)
+
+  revPluto.add(sun.getBody(), pluto.getBody())
+  scene.add(revPluto)
+
+
 }, 1000)
 
 /***************** END GROUP ***************/
@@ -130,7 +164,15 @@ var animate = function ()
   if(pluto) pluto.animate()
 
 
-  if(group) setTimeout(function(){group.rotation.y += 0.01}, 1000)
+  if(revMercury) setTimeout(function(){revMercury.rotation.y += 0.15}, 1000)
+  if(revVenus) setTimeout(function(){revVenus.rotation.y += 0.075}, 1000)
+  if(revBumi) setTimeout(function(){revBumi.rotation.y += 0.05}, 1000)
+  if(revMars) setTimeout(function(){revMars.rotation.y += 0.025}, 1000)
+  if(revJupiter) setTimeout(function(){revJupiter.rotation.y += 0.00375}, 1000)
+  if(revSaturnus) setTimeout(function(){revSaturnus.rotation.y += 0.001875}, 1000)
+  if(revUranus) setTimeout(function(){revUranus.rotation.y += 0.00046875}, 1000)
+  if(revNeptunus) setTimeout(function(){revNeptunus.rotation.y += 0.000234375}, 1000)
+  if(revPluto) setTimeout(function(){revPluto.rotation.y += 0.0001171875}, 1000)
 
   renderer.render( scene, camera.camera );
 };

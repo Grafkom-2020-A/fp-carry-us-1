@@ -3,7 +3,7 @@ import { THREEx } from '../lib/THREEx.FullScreen.js';
 
 class Camera {
     constructor() {
-        this.camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 10000 );
+        this.camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 50000 );
         this.DELTA_FROM_PLANE = 300;
         this.Y_FROM_PLANE = 100;
         this.loadToolTip();
