@@ -10,12 +10,17 @@ let renderer = new THREE.WebGLRenderer();
 let camera = new Camera();
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
-let sun = new Planet(scene, '../assets/space_objects/Sun.glb');
+let sun = new Planet(scene, '../../assets/space_objects/Sun.glb');
+sun.setPosition(50, 100, -50)
+// if(sun) console.log("sun")
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 //------------------Lighting---------------------// Let's put this on the sun later
+var ambient = new THREE.AmbientLight( 0x404040)
+scene.add(ambient)
+
 var light2 = new THREE.PointLight(0xFFD8C0, 7, 0, 2);
 light2.position.set(50, 100,-50)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
@@ -36,8 +41,7 @@ camera.render();
 
 var animate = function () {
   requestAnimationFrame( animate );
-  // sun.render();
-  sun.animate()
+  if(sun) sun.animate()
   renderer.render( scene, camera.camera );
 };
 
