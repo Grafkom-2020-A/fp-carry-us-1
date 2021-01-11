@@ -50,7 +50,7 @@ class Planet
   
   animate()
   {
-    this.body.rotation.y += 0.01
+    this.body.rotation.y += 0.001
   }
 }
 
