@@ -16,7 +16,6 @@ let sun = new Planet('../../assets/space_objects/Sun.glb');
 let mercury = new Planet('../../assets/space_objects/Mercury.glb');
 let venus = new Planet('../../assets/space_objects/Venus.glb');
 let earth = new Planet('../../assets/space_objects/Earth.glb');
-let moon = new Planet('../../assets/space_objects/Moon.glb');
 let mars = new Planet('../../assets/space_objects/Mars.glb');
 let jupiter = new Planet('../../assets/space_objects/Jupiter.glb');
 let saturnus = new Planet('../../assets/space_objects/Saturn.glb');
@@ -38,9 +37,6 @@ setInterval(function(){
   earth.setPosition(-350, 0, 0)
   earth.setSize(0.05)
 
-  moon.setPosition(-375, 0, 0)
-  moon.setSize(0.01)
-  
   mars.setPosition(-450, 0, 0)
   mars.setSize(0.05)
 
@@ -77,22 +73,6 @@ scene.add(light2,pointLightHelper);
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
 //----------------- GROUP ------------//
-
-// let then = 0
-// let now = 1
-// function planetRevolution()
-// {
-//     now *= 0.1  // make it seconds
-
-//     const delta = now - then
-//     then = now
-
-//     mars.setPosition(Math.cos(delta) * 450, 0, Math.sin(delta) * 450)
-
-//     // mars.position.z=Math.sin(delta) * 100
-
-// }
-
 var revMercury = new THREE.Group()
 var revVenus = new THREE.Group()
 var revBumi = new THREE.Group()
@@ -149,33 +129,30 @@ camera.render();
 var animate = function ()
 {
   requestAnimationFrame( animate );
-  // if(sun) setTimeout(function(){sun.animate()}, 0)
 
-  if(sun) sun.animate()
-  if(mercury) mercury.animate()
-  if(venus) venus.animate()
-  if(earth) earth.animate()
-  if(moon) moon.animate()
-  if(mars) mars.animate()
-  if(jupiter) jupiter.animate()
-  if(saturnus) saturnus.animate()
-  if(uranus) uranus.animate()
-  if(neptunus) neptunus.animate()
-  if(pluto) pluto.animate()
+  sun.animate()
+  mercury.animate()
+  venus.animate()
+  earth.animate()
+  mars.animate()
+  jupiter.animate()
+  saturnus.animate()
+  uranus.animate()
+  neptunus.animate()
+  pluto.animate()
 
-
-  if(revMercury) setTimeout(function(){revMercury.rotation.y += 0.15}, 1000)
-  if(revVenus) setTimeout(function(){revVenus.rotation.y += 0.075}, 1000)
-  if(revBumi) setTimeout(function(){revBumi.rotation.y += 0.05}, 1000)
-  if(revMars) setTimeout(function(){revMars.rotation.y += 0.025}, 1000)
-  if(revJupiter) setTimeout(function(){revJupiter.rotation.y += 0.00375}, 1000)
-  if(revSaturnus) setTimeout(function(){revSaturnus.rotation.y += 0.001875}, 1000)
-  if(revUranus) setTimeout(function(){revUranus.rotation.y += 0.00046875}, 1000)
-  if(revNeptunus) setTimeout(function(){revNeptunus.rotation.y += 0.000234375}, 1000)
-  if(revPluto) setTimeout(function(){revPluto.rotation.y += 0.0001171875}, 1000)
+  revMercury.rotation.y += 0.15
+  revVenus.rotation.y += 0.075
+  revBumi.rotation.y += 0.05
+  revMars.rotation.y += 0.025
+  revJupiter.rotation.y += 0.00375
+  revSaturnus.rotation.y += 0.001875
+  revUranus.rotation.y += 0.00046875
+  revNeptunus.rotation.y += 0.000234375
+  revPluto.rotation.y += 0.0001171875
 
   renderer.render( scene, camera.camera );
 };
 
 renderer.render( scene, camera.camera );
-animate();
+setTimeout(() => {  animate(); }, 1500);
