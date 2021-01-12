@@ -54,7 +54,7 @@ setInterval(function(){
 
   pluto.setPosition(-950, 0, 0)
   pluto.setSize(0.03)
-}, 1000)
+}, 1500)
 
 
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -64,7 +64,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFD8C0, 7, 0, 2);
+var light2 = new THREE.PointLight(0xFFD8C0, 5, 0, 2);
 light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
@@ -113,7 +113,7 @@ setTimeout(function()
   scene.add(revPluto)
 
 
-}, 1000)
+}, 1500)
 
 /***************** END GROUP ***************/
 

@@ -20,6 +20,7 @@ class Spaceship {
             this.body = gltf.scene;
             scene.add( this.body );
             this.body.position.set(100, 0, 100);
+            this.body.rotation.y = 10;
             this.body.scale.set(0.1, 0.1, 0.1)
             this.initCamera();
         }.bind(this));
@@ -51,6 +52,11 @@ class Spaceship {
 
     saveCamera() {
         this.camera_position = this.camera.camera.position;
+    }
+
+    getPosition()
+    {
+      return ("X = " + this.body.position.x + "\nY= " + this.body.position.y + "\nZ= " + this.body.position.z)
     }
 
     loadCamera() {
