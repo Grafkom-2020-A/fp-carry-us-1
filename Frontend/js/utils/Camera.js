@@ -66,7 +66,7 @@ class Camera {
     }
 
     goToPlanet() {
-        console.log(this.shortestPlanet);
+        window.open(window.location.href + this.shortestPlanet + '.html', "_blank"); 
     }
 
     render() {
