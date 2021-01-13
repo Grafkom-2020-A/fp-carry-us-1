@@ -8,8 +8,10 @@ class Spaceship {
         this.Z_TRANSLATION_BOOST = 10;
         this.X_ROTATION = 0.01;
         this.Y_ROTATION = 0.01;
+        this.SHORTEST_DISTANCE = 1500;
         this.camera_position = null;
         this.is_stand_by = false;
+        this.allPlanet = [];
         this.load(scene);
     }
 
@@ -81,6 +83,10 @@ class Spaceship {
         this.readyState();
     }
 
+    loadAllPlanet(allPlanet) {
+        this.allPlanet = allPlanet;
+    }
+
     standBy() {
         this.is_stand_by = true;
     }
@@ -119,6 +125,34 @@ class Spaceship {
                     break;
             }
         }.bind(this));
+
+        let plane = this;
+
+        setInterval(() => {
+            let shortestExist = false;
+            let shortestDistance = 999999999;
+            let shortestPlanet = "";
+            let planePosition = plane.body.position;
+
+            for (let index = 0; index < plane.allPlanet.length; index++) {
+                let planet = plane.allPlanet[index]
+                if(!planet.body) continue
+                let dist = planePosition.distanceTo(planet.body.position);
+                // if(planet.name == "jupiter")
+                    // console.log(planet.body.position)
+
+                if( dist <= this.SHORTEST_DISTANCE && dist < shortestDistance) {
+                    shortestExist = true;
+                    shortestPlanet = planet.name;
+                }
+            }
+
+
+            if (!shortestExist) plane.camera.hideInformation();
+            else {
+                plane.camera.showInformation(shortestPlanet);
+            }
+        }, 1000);
     }
 }
 

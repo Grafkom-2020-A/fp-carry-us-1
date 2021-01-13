@@ -6,8 +6,11 @@ class Camera {
         this.camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 50000 );
         this.DELTA_FROM_PLANE = 300;
         this.Y_FROM_PLANE = 100;
+        this.informationShowed = false;
+        this.shortestPlanet = "";
         this.loadToolTip();
         this.loadControls();
+        this.loadInformation();
     }
 
     loadToolTip() {
@@ -26,6 +29,27 @@ class Camera {
         body.appendChild(img);
     }
 
+    loadInformation() {
+        let body = document.getElementsByTagName("BODY")[0]; 
+        let img = document.createElement('img');
+        img.src = '../../../assets/hud/info.png';
+        img.id = 'info';
+        body.appendChild(img);
+    }
+
+    showInformation(planetName) {
+        this.informationShowed = true;
+        this.shortestPlanet = planetName;
+        let img = document.getElementById("info"); 
+        img.style.visibility = "visible"; 
+    }
+
+    hideInformation() {
+        this.informationShowed = false;
+        let img = document.getElementById("info"); 
+        img.style.visibility = "hidden"; 
+    }
+
     showControls() {
         let img = document.getElementById("controls"); 
         img.style.visibility = "visible"; 
@@ -41,10 +65,15 @@ class Camera {
         else THREEx.FullScreen.request();
     }
 
+    goToPlanet() {
+        console.log(this.shortestPlanet);
+    }
+
     render() {
         document.addEventListener('keydown', function(e) {
             if (e.key == 'f') this.toggleFullscreen();
             if (e.key == 'h') this.showControls();
+            if (e.key == 'i' && this.informationShowed) this.goToPlanet();
         }.bind(this));
 
         document.addEventListener('keyup', function(e) {

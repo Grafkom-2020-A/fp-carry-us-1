@@ -25,3 +25,13 @@ canvas {
     left: 32.5%;
     visibility: hidden;
 }
+
+#info {
+    display:block;
+    width:200px; /* you can use % */
+    height: auto;
+    position: absolute;
+    top: 40%;
+    left: 65%;
+    visibility: hidden;
+}

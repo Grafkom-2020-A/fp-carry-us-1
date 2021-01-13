@@ -1,14 +1,16 @@
 import { GLTFLoader } from './../lib/GLTFLoader.js';
+import * as THREE from '../lib/three.js';
 
 class Planet
 {
-  constructor(glbPath)
+  constructor(glbPath, name = "planet")
   {
     this.body;
     this.path = glbPath
     this.X_ROTATION = 0.01;
     this.Y_ROTATION = 0.01;
     this.is_revoluting = true
+    this.name = name
     this.load()
   }
 
@@ -19,6 +21,16 @@ class Planet
     loader.load( this.path, function ( gltf ) {
       this.body = gltf.scene;
       this.body.scale.set(0.1,0.1,0.1)
+      
+      if(this.name == "sun")
+        this.body.traverse( function ( child ) {
+
+            if ( child instanceof THREE.Mesh) {
+              child.material.emissiveIntensity = 1
+              child.material.emissive = new THREE.Color(1, 1, 1)
+            }
+
+        } );
     }.bind(this))
   }
 
@@ -49,7 +61,8 @@ class Planet
   
   animate()
   {
-    this.body.rotation.y += 0.001
+    if(this.body)
+      this.body.rotation.y += 0.001
   }
 }
 

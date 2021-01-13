@@ -10,18 +10,17 @@ let renderer = new THREE.WebGLRenderer();
 let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
-
-let sun = new Planet('../../assets/space_objects/Sun.glb');
-
-let mercury = new Planet('../../assets/space_objects/Mercury.glb');
-let venus = new Planet('../../assets/space_objects/Venus.glb');
-let earth = new Planet('../../assets/space_objects/Earth.glb');
-let mars = new Planet('../../assets/space_objects/Mars.glb');
-let jupiter = new Planet('../../assets/space_objects/Jupiter.glb');
-let saturnus = new Planet('../../assets/space_objects/Saturn.glb');
-let uranus = new Planet('../../assets/space_objects/Uranus.glb');
-let neptunus = new Planet('../../assets/space_objects/Neptune.glb');
-let pluto = new Planet('../../assets/space_objects/Pluto.glb');
+let sun = new Planet('../../assets/space_objects/Sun.glb', "sun");
+let mercury = new Planet('../../assets/space_objects/Mercury.glb', "mercury");
+let venus = new Planet('../../assets/space_objects/Venus.glb', "venus");
+let earth = new Planet('../../assets/space_objects/Earth.glb', "earth");
+let mars = new Planet('../../assets/space_objects/Mars.glb', "mars");
+let jupiter = new Planet('../../assets/space_objects/Jupiter.glb', "jupiter");
+let saturnus = new Planet('../../assets/space_objects/Saturn.glb', "saturnus");
+let uranus = new Planet('../../assets/space_objects/Uranus.glb', "uranus");
+let neptunus = new Planet('../../assets/space_objects/Neptune.glb', "neptunus");
+let pluto = new Planet('../../assets/space_objects/Pluto.glb', "pluto");
+let allPlanet = [];
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -30,13 +29,13 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFD8C0, 5, 0, 2);
+var light2 = new THREE.PointLight(0xFFD8C0, 1, 0, 2);
 light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
 scene.add(light2,pointLightHelper);
 /***************** End Lighting *****************/
-var controls = new OrbitControls(camera.camera, renderer.domElement)
+// var controls = new OrbitControls(camera.camera, renderer.domElement)
 
 //----------------- GROUP ------------//
 var revMercury = new THREE.Group()
@@ -119,10 +118,24 @@ setInterval(() => {
   pluto.setPosition(-9000, 0, 0)
   pluto.setSize(0.1)
 
-  if(isAllLoaded) clearInterval();
+  if(isAllLoaded) {
+    allPlanet.push(sun);
+    allPlanet.push(mercury);
+    allPlanet.push(venus);
+    allPlanet.push(earth);
+    allPlanet.push(mars);
+    allPlanet.push(jupiter);
+    allPlanet.push(saturnus);
+    allPlanet.push(uranus);
+    allPlanet.push(neptunus);
+    allPlanet.push(pluto);
+    spaceship.loadAllPlanet(allPlanet);
+    clearInterval();
+  }
 }, 1000);
 
 setInterval(() => {
+  console.log(jupiter.body.position)
   sun.animate()
   mercury.animate()
   venus.animate()
