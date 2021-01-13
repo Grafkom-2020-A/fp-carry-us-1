@@ -1,88 +1,108 @@
 import { GLTFLoader } from './../lib/GLTFLoader.js';
+import { Camera } from '../utils/Camera.js';
 
 class Spaceship {
     constructor(scene, camera) {
-        const loader = new GLTFLoader();
         this.body;
         this.camera = camera;
-        this.Z_ROTATION_BOOST = 0.005;
-        this.Z_ROTATION_RECOVERY = 0.005;
-        this.Z_TRANSLATION_BOOST = 50;
-        this.Z_TRANSLATION = 10;
+        this.Z_TRANSLATION_BOOST = 10;
         this.X_ROTATION = 0.01;
         this.Y_ROTATION = 0.01;
-        this.time = new Date().getTime();
+        this.camera_position = null;
+        this.is_stand_by = false;
+        this.load(scene);
+    }
+
+    load(scene) {
+        const loader = new GLTFLoader();
 
         loader.load( '../../assets/spaceship/spaceship.glb', function ( gltf ) {
             this.body = gltf.scene;
             scene.add( this.body );
             this.body.position.set(100, 0, 100);
-            this.camera.camera.position.z = -350;
-            this.camera.camera.position.y = 100;
-            this.body.add(this.camera.camera);
-            this.camera.camera.lookAt(this.body.position);
+            this.body.rotation.y = 10;
+            this.body.scale.set(0.1, 0.1, 0.1)
+            this.initCamera();
         }.bind(this));
     }
 
-    move(vertical, horizontal) {
-        this.body.rotateX(vertical);
-        this.body.rotateY(horizontal);
-        this.body.translateZ((vertical != 0 || horizontal != 0)?this.Z_TRANSLATION:this.Z_TRANSLATION_BOOST);
+    move(vertical, horizontal, boost) {
+        if(!this.is_stand_by) {
+            this.body.rotateX(vertical);
+            this.body.rotateY(horizontal);
+            this.body.translateZ(boost);
 
-        let z_rotation = parseFloat(this.body.rotation.z).toFixed(2);
-
-        if(horizontal != 0 && z_rotation < 0.25 && z_rotation > -0.25) {
-            this.body.rotateZ(this.Z_ROTATION_BOOST * -(horizontal/this.X_ROTATION));
+            this.camera.camera.lookAt(this.body.position);
         }
+    }
 
+    initCamera() {
+        this.camera.camera.position.z = this.body.position.z - 450;
+        this.camera.camera.position.y = this.body.position.y + 100;
+        // this.camera.camera.position.x = this.body.position.x - 100;
+        this.body.add(this.camera.camera);
         this.camera.camera.lookAt(this.body.position);
     }
 
-    recovery() {
-        if(parseFloat(this.body.rotation.z).toFixed(2) != 0.00) {
-            let interval_id = setInterval(() => {
-                let z_rotation = parseFloat(this.body.rotation.z).toFixed(2);
+    releaseCamera() {
+        this.body.remove(this.camera.camera);
+        this.saveCamera();
+        this.standBy();
+    }
 
-                if (z_rotation < 0) this.body.rotateZ(this.Z_ROTATION_RECOVERY);
-                else if(z_rotation > 0) this.body.rotateZ(-this.Z_ROTATION_RECOVERY);
+    saveCamera() {
+        this.camera_position = this.camera.camera.position;
+    }
 
-                if(z_rotation == 0.00) {
-                    this.body.rotation.z = 0;
-                    clearInterval(interval_id);
-                }
-            }, 100);
-        }
+    getPosition()
+    {
+      return ("X = " + this.body.position.x + "\nY= " + this.body.position.y + "\nZ= " + this.body.position.z)
+    }
+
+    loadCamera() {
+        this.camera.camera.set(this.camera_position);
+        this.body.add(this.camera.camera);
+        this.camera.camera.lookAt(this.body.position);
+        this.readyState();
+    }
+
+    standBy() {
+        this.is_stand_by = true;
+    }
+
+    readyState() {
+        this.is_stand_by = false;
     }
 
     render() {
+        this.camera.render();
+
         document.addEventListener('keydown', function (e) {
             let vertical = 0;
             let horizontal = 0;
-            switch (e.key) {
-                case 'a':
+            let boost = 0;
+            switch (e.keyCode) {
+                case 65: // A
                     horizontal = this.X_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
-                case 'd':
+                case 68: // D
                     horizontal = -this.X_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
-                case 'w':
+                case 87: // W
                     vertical = -this.Y_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
-                case 's':
+                case 83: // S
                     vertical = this.Y_ROTATION;
-                    this.move(vertical, horizontal);
+                    this.move(vertical, horizontal, boost);
                     break;
-                case ' ':
-                    this.move(vertical, horizontal);
+                case 32: // Shift
+                    boost = this.Z_TRANSLATION_BOOST;
+                    this.move(vertical, horizontal, boost);
                     break;
             }
-        }.bind(this));
-
-        document.addEventListener('keyup', function(e) {
-            this.recovery();
         }.bind(this));
     }
 }
