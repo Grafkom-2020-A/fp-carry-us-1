@@ -140,6 +140,11 @@ scene.add(light2,pointLightHelper);
 /***************** End Lighting *****************/
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
+setTimeout(function()
+{
+  scene.add(sun.getBody())
+}, 1000)
+
 window.addEventListener('resize', function(){
   renderer.setSize( window.innerWidth, window.innerHeight )
   camera.camera.aspect = window.innerWidth / window.innerHeight
