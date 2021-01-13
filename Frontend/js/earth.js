@@ -23,14 +23,25 @@ setInterval(function(){
 }, 1000)
 
 //------------------Text Sprite---------------------//
-
+var defaultWidthForText = 450;
+var canvasMinSize = 300;
+var textMultiplier = 1.2;
 var spritey = makeTextSprite( " EARTH ", 
 { fontsize: 32, fontface: "Georgia", borderColor: {r:0, g:0, b:255, a:1.0} } );
 spritey.position.set(100,105,0);
 scene.add( spritey );
 
+function getMaxWidth(context, texts)
+{
+    let maxWidth = 0;
+    for(let i in texts)
+        maxWidth = Math.max(maxWidth, context.measureText(texts[i]).width);
+    return maxWidth;
+}
+
 function makeTextSprite( message, parameters )
 {
+  
 	if ( parameters === undefined ) parameters = {};
 	
 	var fontface = parameters.hasOwnProperty("fontface") ? 
@@ -48,15 +59,21 @@ function makeTextSprite( message, parameters )
 	var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
 		parameters["backgroundColor"] : { r:255, g:255, b:255, a:1.0 };
 
-	var spriteAlignment = THREE.SpriteAlignment.topLeft;
+
 		
 	var canvas = document.createElement('canvas');
 	var context = canvas.getContext('2d');
 	context.font = "Bold " + fontsize + "px " + fontface;
     
-	// get size data (height depends only on font size)
-	var metrics = context.measureText( message );
-	var textWidth = metrics.width;
+  var texts = message.split('\n');
+  var totalLine = texts.length;
+  var textWidth = getMaxWidth(context, texts);
+
+  // setting canvas size
+  var size = Math.max(canvasMinSize, textWidth + 2 * borderThickness);
+  canvas.width = size;
+  canvas.height = size;
+  context.font = "Bold " + fontsize + "px " + fontface;
 	
 	// background color
 	context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
@@ -79,10 +96,26 @@ function makeTextSprite( message, parameters )
 	texture.needsUpdate = true;
 
 	var spriteMaterial = new THREE.SpriteMaterial( 
-		{ map: texture, useScreenCoordinates: false, alignment: spriteAlignment } );
+		{ map: texture, useScreenCoordinates: false } );
 	var sprite = new THREE.Sprite( spriteMaterial );
 	sprite.scale.set(100,50,1.0);
 	return sprite;	
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
 }
 
 /**************** End Text Sprite *****************/
