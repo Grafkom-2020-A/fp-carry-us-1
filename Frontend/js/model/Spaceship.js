@@ -1,5 +1,6 @@
 import { GLTFLoader } from './../lib/GLTFLoader.js';
 import { Camera } from '../utils/Camera.js';
+import * as THREE from '../lib/three.js';
 
 class Spaceship {
     constructor(scene, camera) {
@@ -8,7 +9,7 @@ class Spaceship {
         this.Z_TRANSLATION_BOOST = 10;
         this.X_ROTATION = 0.01;
         this.Y_ROTATION = 0.01;
-        this.SHORTEST_DISTANCE = 1500;
+        this.SHORTEST_DISTANCE = 1250;
         this.camera_position = null;
         this.is_stand_by = false;
         this.allPlanet = [];
@@ -132,12 +133,16 @@ class Spaceship {
             let shortestExist = false;
             let shortestDistance = 999999999;
             let shortestPlanet = "";
-            let planePosition = plane.body.position;
+            let planePosition = new THREE.Vector3;
+            plane.body.getWorldPosition(planePosition)
 
             for (let index = 0; index < plane.allPlanet.length; index++) {
                 let planet = plane.allPlanet[index]
+                let target = new THREE.Vector3(); // create once an reuse it
+
                 if(!planet.body) continue
-                let dist = planePosition.distanceTo(planet.body.position);
+                planet.body.getWorldPosition( target );
+                let dist = planePosition.distanceTo(target);
                 // if(planet.name == "jupiter")
                     // console.log(planet.body.position)
 

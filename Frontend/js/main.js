@@ -48,7 +48,7 @@ var revUranus = new THREE.Group()
 var revNeptunus = new THREE.Group()
 var revPluto = new THREE.Group()
 
-setInterval(() => {
+let intervalId = setInterval(() => {
   let isAllLoaded = true;
   if(!sun.getBody() ||
   !mercury.getBody() ||
@@ -130,12 +130,11 @@ setInterval(() => {
     allPlanet.push(neptunus);
     allPlanet.push(pluto);
     spaceship.loadAllPlanet(allPlanet);
-    clearInterval();
+    clearInterval(intervalId);
   }
 }, 1000);
 
 setInterval(() => {
-  console.log(jupiter.body.position)
   sun.animate()
   mercury.animate()
   venus.animate()
