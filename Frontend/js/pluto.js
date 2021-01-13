@@ -11,18 +11,18 @@ let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 
-let mars = new Planet('../../assets/space_objects/Mars.glb');
+let pluto = new Planet('../../assets/space_objects/Pluto.glb');
 
 setInterval(function(){ 
-  mars.setPosition(0, 0, 0)
-  mars.setSize(0.15)
+  pluto.setPosition(0, 0, 0)
+  pluto.setSize(0.15)
 }, 1000)
 
 //------------------Text Sprite---------------------//
 var defaultWidthForText = 450;
 var canvasMinSize = 300;
 var textMultiplier = 1.2;
-var spritey = makeTextSprite( " MARS \n is \n not \n an \n alien \n race's \n base. ", 
+var spritey = makeTextSprite( " pluto \n is \n not \n an \n alien \n race's \n base. ", 
 { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
 spritey.position.set(150,0,0);
 scene.add( spritey );
@@ -142,13 +142,13 @@ scene.add(light2,pointLightHelper);
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
 //----------------- GROUP ------------//
-var revMars = new THREE.Group()
+var revPluto = new THREE.Group()
 
 setTimeout(function()
 {
-  scene.add(mars.getBody())
-  // revMars.add(moon.getBody())
-  scene.add(revMars)
+  scene.add(pluto.getBody())
+  // revpluto.add(moon.getBody())
+  scene.add(revPluto)
 }, 1000)
 
 /***************** END GROUP ***************/
@@ -166,13 +166,13 @@ var animate = function ()
 {
   requestAnimationFrame( animate );
 
-  mars.animate()
+  pluto.animate()
   // console.log(spaceship.getPosition())
-  revMars.rotation.x += 0.01
-  revMars.rotation.y += 0.05
-  // revMars.rotation.z += 0.005
-  // mars.getBody().rotation.x = 0
-  // mars.getBody().rotation.y += 0.01
+  revPluto.rotation.x += 0.01
+  revPluto.rotation.y += 0.05
+  // revpluto.rotation.z += 0.005
+  // pluto.getBody().rotation.x = 0
+  // pluto.getBody().rotation.y += 0.01
 
   renderer.render( scene, camera.camera );
 };

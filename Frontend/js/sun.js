@@ -11,18 +11,18 @@ let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 
-let mars = new Planet('../../assets/space_objects/Mars.glb');
+let sun = new Planet('../../assets/space_objects/Sun.glb');
 
 setInterval(function(){ 
-  mars.setPosition(0, 0, 0)
-  mars.setSize(0.15)
+  sun.setPosition(0, 0, 0)
+  sun.setSize(0.15)
 }, 1000)
 
 //------------------Text Sprite---------------------//
 var defaultWidthForText = 450;
 var canvasMinSize = 300;
 var textMultiplier = 1.2;
-var spritey = makeTextSprite( " MARS \n is \n not \n an \n alien \n race's \n base. ", 
+var spritey = makeTextSprite( " SUN \n is \n not \n cold \n at all ", 
 { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
 spritey.position.set(150,0,0);
 scene.add( spritey );
@@ -125,7 +125,6 @@ function roundRect(ctx, x, y, w, h, r) {
 
 /**************** End Text Sprite *****************/
 
-
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -133,7 +132,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFD8C0, 5, 0, 2);
+var light2 = new THREE.PointLight(0xFFD8C0, 15, 0, 2);
 light2.position.set(0, 550, 750)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
@@ -141,17 +140,10 @@ scene.add(light2,pointLightHelper);
 /***************** End Lighting *****************/
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
-//----------------- GROUP ------------//
-var revMars = new THREE.Group()
-
 setTimeout(function()
 {
-  scene.add(mars.getBody())
-  // revMars.add(moon.getBody())
-  scene.add(revMars)
+  scene.add(sun.getBody())
 }, 1000)
-
-/***************** END GROUP ***************/
 
 window.addEventListener('resize', function(){
   renderer.setSize( window.innerWidth, window.innerHeight )
@@ -166,14 +158,7 @@ var animate = function ()
 {
   requestAnimationFrame( animate );
 
-  mars.animate()
-  // console.log(spaceship.getPosition())
-  revMars.rotation.x += 0.01
-  revMars.rotation.y += 0.05
-  // revMars.rotation.z += 0.005
-  // mars.getBody().rotation.x = 0
-  // mars.getBody().rotation.y += 0.01
-
+  sun.animate()
   renderer.render( scene, camera.camera );
 };
 

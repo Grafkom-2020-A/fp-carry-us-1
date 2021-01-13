@@ -11,18 +11,18 @@ let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 
-let mars = new Planet('../../assets/space_objects/Mars.glb');
+let uranus = new Planet('../../assets/space_objects/Uranus.glb');
 
 setInterval(function(){ 
-  mars.setPosition(0, 0, 0)
-  mars.setSize(0.15)
+  uranus.setPosition(0, 0, 0)
+  uranus.setSize(0.15)
 }, 1000)
 
 //------------------Text Sprite---------------------//
 var defaultWidthForText = 450;
 var canvasMinSize = 300;
 var textMultiplier = 1.2;
-var spritey = makeTextSprite( " MARS \n is \n not \n an \n alien \n race's \n base. ", 
+var spritey = makeTextSprite( " uranus \n is \n not \n an \n alien \n race's \n base. ", 
 { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
 spritey.position.set(150,0,0);
 scene.add( spritey );
@@ -142,13 +142,13 @@ scene.add(light2,pointLightHelper);
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
 //----------------- GROUP ------------//
-var revMars = new THREE.Group()
+var revUranus = new THREE.Group()
 
 setTimeout(function()
 {
-  scene.add(mars.getBody())
-  // revMars.add(moon.getBody())
-  scene.add(revMars)
+  scene.add(uranus.getBody())
+  // revuranus.add(moon.getBody())
+  scene.add(revUranus)
 }, 1000)
 
 /***************** END GROUP ***************/
@@ -166,13 +166,13 @@ var animate = function ()
 {
   requestAnimationFrame( animate );
 
-  mars.animate()
+  uranus.animate()
   // console.log(spaceship.getPosition())
-  revMars.rotation.x += 0.01
-  revMars.rotation.y += 0.05
-  // revMars.rotation.z += 0.005
-  // mars.getBody().rotation.x = 0
-  // mars.getBody().rotation.y += 0.01
+  revUranus.rotation.x += 0.01
+  revUranus.rotation.y += 0.05
+  // revuranus.rotation.z += 0.005
+  // uranus.getBody().rotation.x = 0
+  // uranus.getBody().rotation.y += 0.01
 
   renderer.render( scene, camera.camera );
 };
