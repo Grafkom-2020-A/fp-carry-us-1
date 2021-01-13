@@ -26,9 +26,9 @@ setInterval(function(){
 var defaultWidthForText = 450;
 var canvasMinSize = 300;
 var textMultiplier = 1.2;
-var spritey = makeTextSprite( " EARTH ", 
-{ fontsize: 32, fontface: "Georgia", borderColor: {r:0, g:0, b:255, a:1.0} } );
-spritey.position.set(100,105,0);
+var spritey = makeTextSprite( " EARTH \n is \n not \n a \n battlefield ", 
+{ fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
+spritey.position.set(150,0,0);
 scene.add( spritey );
 
 function getMaxWidth(context, texts)
@@ -57,7 +57,7 @@ function makeTextSprite( message, parameters )
 		parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
 	
 	var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
-		parameters["backgroundColor"] : { r:255, g:255, b:255, a:1.0 };
+		parameters["backgroundColor"] : { r:255, g:255, b:255, a:0.0 };
 
 
 		
@@ -82,23 +82,32 @@ function makeTextSprite( message, parameters )
 	context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + ","
 								  + borderColor.b + "," + borderColor.a + ")";
 
-	context.lineWidth = borderThickness;
-	roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
-	// 1.4 is extra height factor for text below baseline: g,j,p,q.
+  context.lineWidth = borderThickness;
+  // let totalTextHeight = fontsize * textMultiplier * totalLine;
+	// roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
+  let totalTextHeight = fontsize * textMultiplier * totalLine;
+  roundRect(context, (size/2 - textWidth / 2) - borderThickness/2, size / 2 - fontsize/2 - totalTextHeight/2, textWidth + borderThickness, totalTextHeight + fontsize/2 , 6);
+
+  // 1.4 is extra height factor for text below baseline: g,j,p,q.
 	
 	// text color
-	context.fillStyle = "rgba(0, 0, 0, 1.0)";
+	context.fillStyle = "rgba(255, 255, 255, 1.0)";
 
-	context.fillText( message, borderThickness, fontsize + borderThickness);
+  let startY = size / 2  - totalTextHeight/2 + fontsize/2 ;
+  for(var i = 0; i < totalLine; i++) {
+      let curWidth = context.measureText(texts[i]).width;
+      context.fillText(texts[i], size/2 - curWidth/2, startY + fontsize * i * textMultiplier);
+  }
+	// context.fillText( message, borderThickness, fontsize + borderThickness);
 	
 	// canvas contents will be used for a texture
 	var texture = new THREE.Texture(canvas) 
 	texture.needsUpdate = true;
 
 	var spriteMaterial = new THREE.SpriteMaterial( 
-		{ map: texture, useScreenCoordinates: false } );
+		{ map: texture} );
 	var sprite = new THREE.Sprite( spriteMaterial );
-	sprite.scale.set(100,50,1.0);
+	sprite.scale.set(1000,1000,1.0);
 	return sprite;	
 }
 
