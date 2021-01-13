@@ -19,7 +19,6 @@ class Planet
     loader.load( this.path, function ( gltf ) {
       this.body = gltf.scene;
       this.body.scale.set(0.1,0.1,0.1)
-      this.body.position.set(50, 0, -50);
     }.bind(this))
   }
 

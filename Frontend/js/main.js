@@ -23,40 +23,6 @@ let uranus = new Planet('../../assets/space_objects/Uranus.glb');
 let neptunus = new Planet('../../assets/space_objects/Neptune.glb');
 let pluto = new Planet('../../assets/space_objects/Pluto.glb');
 
-
-setInterval(function(){ 
-  sun.setPosition(0, 0, 0)
-  sun.setSize(0.15)
-
-  mercury.setPosition(-150, 0, 0)
-  mercury.setSize(0.05)
-  
-  venus.setPosition(-250, 0, 0)
-  venus.setSize(0.05)
-  
-  earth.setPosition(-350, 0, 0)
-  earth.setSize(0.05)
-
-  mars.setPosition(-450, 0, 0)
-  mars.setSize(0.05)
-
-  jupiter.setPosition(-550, 0, 0)
-  jupiter.setSize(0.08)
-
-  saturnus.setPosition(-650, 0, 0)
-  saturnus.setSize(0.05)
-
-  uranus.setPosition(-750, 0, 0)
-  uranus.setSize(0.05)
-
-  neptunus.setPosition(-850, 0, 0)
-  neptunus.setSize(0.05)
-
-  pluto.setPosition(-950, 0, 0)
-  pluto.setSize(0.03)
-}, 1500)
-
-
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -83,8 +49,19 @@ var revUranus = new THREE.Group()
 var revNeptunus = new THREE.Group()
 var revPluto = new THREE.Group()
 
-setTimeout(function()
-{
+setInterval(() => {
+  let isAllLoaded = true;
+  if(!sun.getBody() ||
+  !mercury.getBody() ||
+  !venus.getBody() ||
+  !earth.getBody() ||
+  !mars.getBody() ||
+  !jupiter.getBody() ||
+  !saturnus.getBody() ||
+  !uranus.getBody() ||
+  !neptunus.getBody() ||
+  !pluto.getBody()) isAllLoaded = false;
+
   revMercury.add(sun.getBody(), mercury.getBody())
   scene.add(revMercury)
 
@@ -112,8 +89,61 @@ setTimeout(function()
   revPluto.add(sun.getBody(), pluto.getBody())
   scene.add(revPluto)
 
+  sun.setPosition(0, 0, 0)
+  sun.setSize(2)
 
-}, 1500)
+  mercury.setPosition(-2000, 0, 0)
+  mercury.setSize(0.1)
+
+  venus.setPosition(-2500, 0, 0)
+  venus.setSize(0.2)
+
+  earth.setPosition(-3000, 0, 0)
+  earth.setSize(0.2)
+
+  mars.setPosition(-3500, 0, 0)
+  mars.setSize(0.1)
+
+  jupiter.setPosition(-5000, 0, 0)
+  jupiter.setSize(0.75)
+
+  saturnus.setPosition(-6500, 0, 0)
+  saturnus.setSize(0.65)
+
+  uranus.setPosition(-7000, 0, 0)
+  uranus.setSize(0.3)
+
+  neptunus.setPosition(-8000, 0, 0)
+  neptunus.setSize(0.3)
+
+  pluto.setPosition(-9000, 0, 0)
+  pluto.setSize(0.1)
+
+  if(isAllLoaded) clearInterval();
+}, 1000);
+
+setInterval(() => {
+  sun.animate()
+  mercury.animate()
+  venus.animate()
+  earth.animate()
+  mars.animate()
+  jupiter.animate()
+  saturnus.animate()
+  uranus.animate()
+  neptunus.animate()
+  pluto.animate()
+
+  revMercury.rotation.y += 1/87.97
+  revVenus.rotation.y += 1/224.7
+  revBumi.rotation.y += 1/365.26
+  revMars.rotation.y += 1/(365*1.88)
+  revJupiter.rotation.y += 1/(11.86*365)
+  revSaturnus.rotation.y += 1/(29.46 * 365)
+  revUranus.rotation.y += 1/(84.01*365)
+  revNeptunus.rotation.y += 1/(164.79*365)
+  revPluto.rotation.y += 1/(248.58*365)
+}, 25);
 
 /***************** END GROUP ***************/
 
@@ -130,29 +160,7 @@ var animate = function ()
 {
   requestAnimationFrame( animate );
 
-  sun.animate()
-  mercury.animate()
-  venus.animate()
-  earth.animate()
-  mars.animate()
-  jupiter.animate()
-  saturnus.animate()
-  uranus.animate()
-  neptunus.animate()
-  pluto.animate()
-
-  revMercury.rotation.y += 0.15
-  revVenus.rotation.y += 0.075
-  revBumi.rotation.y += 0.05
-  revMars.rotation.y += 0.025
-  revJupiter.rotation.y += 0.00375
-  revSaturnus.rotation.y += 0.001875
-  revUranus.rotation.y += 0.00046875
-  revNeptunus.rotation.y += 0.000234375
-  revPluto.rotation.y += 0.0001171875
-
   renderer.render( scene, camera.camera );
 };
 
-renderer.render( scene, camera.camera );
-setTimeout(() => {  animate(); }, 1500);
+animate();

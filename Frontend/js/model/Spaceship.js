@@ -19,7 +19,7 @@ class Spaceship {
         loader.load( '../../assets/spaceship/spaceship.glb', function ( gltf ) {
             this.body = gltf.scene;
             scene.add( this.body );
-            this.body.position.set(100, 0, 100);
+            this.body.position.set(1000, 0, 1000);
             this.body.rotation.y = 10;
             this.body.scale.set(0.1, 0.1, 0.1)
             this.initCamera();
@@ -37,7 +37,7 @@ class Spaceship {
     }
 
     initCamera() {
-        this.camera.camera.position.z = this.body.position.z - 450;
+        this.camera.camera.position.z = this.body.position.z - 1250;
         this.camera.camera.position.y = this.body.position.y + 100;
         // this.camera.camera.position.x = this.body.position.x - 100;
         this.body.add(this.camera.camera);
@@ -56,7 +56,22 @@ class Spaceship {
 
     getPosition()
     {
-      return ("X = " + this.body.position.x + "\nY= " + this.body.position.y + "\nZ= " + this.body.position.z)
+        return ("X = " + this.body.position.x + "\nY= " + this.body.position.y + "\nZ= " + this.body.position.z)
+    }
+
+    detectCollisionCubes(object){
+        this.body.geometry.computeBoundingBox(); //not needed if its already calculated
+        object.geometry.computeBoundingBox();
+        this.body.updateMatrixWorld();
+        object.updateMatrixWorld();
+        
+        var box1 = this.body.geometry.boundingBox.clone();
+        box1.applyMatrix4(this.body.matrixWorld);
+
+        var box2 = object.geometry.boundingBox.clone();
+        box2.applyMatrix4(object.matrixWorld);
+
+        return box1.intersectsBox(box2);
     }
 
     loadCamera() {
