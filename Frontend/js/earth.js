@@ -16,11 +16,11 @@ let moon = new Planet('../../assets/space_objects/Moon.glb');
 
 setInterval(function(){ 
   earth.setPosition(0, 0, 0)
-  earth.setSize(0.15)
+  earth.setSize(1.5)
 
-  moon.setPosition(0, 10, 100)
-  moon.setSize(0.01)
-}, 1000)
+  moon.setPosition(0, 100, 1000)
+  moon.setSize(0.1)
+}, 2500)
 
 //------------------Text Sprite---------------------//
 var defaultWidthForText = 450;
@@ -28,7 +28,7 @@ var canvasMinSize = 300;
 var textMultiplier = 1.2;
 var spritey = makeTextSprite( " EARTH \n is \n not \n a \n battlefield ", 
 { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
-spritey.position.set(150,0,0);
+spritey.position.set(1000,0,900);
 scene.add( spritey );
 
 function getMaxWidth(context, texts)
@@ -137,7 +137,7 @@ var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
 var light2 = new THREE.PointLight(0xFFD8C0, 15, 0, 2);
-light2.position.set(0, 550, 750)
+light2.position.set(0, 5500, 7050)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
 scene.add(light2,pointLightHelper);
@@ -152,7 +152,7 @@ setTimeout(function()
   scene.add(earth.getBody())
   revEarth.add(moon.getBody())
   scene.add(revEarth)
-}, 1000)
+}, 2000)
 
 /***************** END GROUP ***************/
 
@@ -182,4 +182,4 @@ var animate = function ()
 };
 
 renderer.render( scene, camera.camera );
-setTimeout(() => {  animate(); }, 1500);
+setTimeout(() => {  animate(); }, 2500);

@@ -15,7 +15,7 @@ let venus = new Planet('../../assets/space_objects/Venus.glb');
 
 setInterval(function(){ 
   venus.setPosition(0, 0, 0)
-  venus.setSize(0.15)
+  venus.setSize(1.5)
 }, 1000)
 
 //------------------Text Sprite---------------------//
@@ -24,7 +24,7 @@ var canvasMinSize = 300;
 var textMultiplier = 1.2;
 var spritey = makeTextSprite( " VENUS \n is \n really \n hot \n bro. ", 
 { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
-spritey.position.set(150,0,0);
+spritey.position.set(1000,0,900);
 scene.add( spritey );
 
 function getMaxWidth(context, texts)
@@ -133,7 +133,7 @@ var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
 var light2 = new THREE.PointLight(0xFFD8C0, 2, 0, 2);
-light2.position.set(0, 550, 750)
+light2.position.set(0, 5500, 7050)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
 scene.add(light2,pointLightHelper);

@@ -29,7 +29,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFD8C0, 1, 0, 2);
+var light2 = new THREE.PointLight(0xFFD8C0, 7, 0, 100);
 light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
@@ -132,7 +132,7 @@ let intervalId = setInterval(() => {
     spaceship.loadAllPlanet(allPlanet);
     clearInterval(intervalId);
   }
-}, 1000);
+}, 1500);
 
 setInterval(() => {
   sun.animate()
@@ -175,4 +175,4 @@ var animate = function ()
   renderer.render( scene, camera.camera );
 };
 
-animate();
+setTimeout(() => { animate() }, 1500); 

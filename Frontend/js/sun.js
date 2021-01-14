@@ -15,8 +15,8 @@ let sun = new Planet('../../assets/space_objects/Sun.glb');
 
 setInterval(function(){ 
   sun.setPosition(0, 0, 0)
-  sun.setSize(0.15)
-}, 1000)
+  sun.setSize(1.5)
+}, 1500)
 
 //------------------Text Sprite---------------------//
 var defaultWidthForText = 450;
@@ -24,7 +24,7 @@ var canvasMinSize = 300;
 var textMultiplier = 1.2;
 var spritey = makeTextSprite( " SUN \n is \n not \n cold \n at all ", 
 { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
-spritey.position.set(150,0,0);
+spritey.position.set(1000,0,900);
 scene.add( spritey );
 
 function getMaxWidth(context, texts)
@@ -133,7 +133,7 @@ var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
 var light2 = new THREE.PointLight(0xFFD8C0, 15, 0, 2);
-light2.position.set(0, 550, 750)
+light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
 scene.add(light2,pointLightHelper);
@@ -143,7 +143,7 @@ var controls = new OrbitControls(camera.camera, renderer.domElement)
 setTimeout(function()
 {
   scene.add(sun.getBody())
-}, 1000)
+}, 1500)
 
 window.addEventListener('resize', function(){
   renderer.setSize( window.innerWidth, window.innerHeight )
