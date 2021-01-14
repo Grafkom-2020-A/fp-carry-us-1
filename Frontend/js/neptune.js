@@ -8,16 +8,15 @@ import { TextSprites } from './utils/TextSprites.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();
-let camera = new Camera(scene);
+let camera = new Camera(false);
 let background = new Background(scene, renderer);
-let spaceship = new Spaceship(scene, camera);
 
 let neptune = new Planet('../../assets/space_objects/Neptune.glb');
 
 setInterval(function(){ 
   neptune.setPosition(0, 0, 0)
   neptune.setSize(1.5)
-}, 1000)
+}, 2000)
 
 //------------------Text Sprite---------------------//
 var defaultWidthForText = 450;
@@ -54,7 +53,7 @@ setTimeout(function()
   scene.add(neptune.getBody())
   // revneptune.add(moon.getBody())
   scene.add(revNeptune)
-}, 1000)
+}, 2000)
 
 /***************** END GROUP ***************/
 
@@ -64,8 +63,8 @@ window.addEventListener('resize', function(){
   camera.camera.updateProjectionMatrix()
 })
 
-spaceship.render();
-camera.render();
+camera.setPosition(2000, 0, 0);
+camera.setLookAt(0, 0, 0);
 
 var animate = function ()
 {

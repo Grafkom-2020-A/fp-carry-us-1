@@ -9,9 +9,8 @@ import { TextSprites } from './utils/TextSprites.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();
-let camera = new Camera(scene);
+let camera = new Camera(false);
 let background = new Background(scene, renderer);
-let spaceship = new Spaceship(scene, camera);
 
 let earth = new Planet('../../assets/space_objects/Earth.glb');
 let moon = new Planet('../../assets/space_objects/Moon.glb');
@@ -68,8 +67,8 @@ window.addEventListener('resize', function(){
   camera.camera.updateProjectionMatrix()
 })
 
-spaceship.render();
-camera.render();
+camera.setPosition(2000, 0, 0);
+camera.setLookAt(0, 0, 0);
 
 var animate = function ()
 {

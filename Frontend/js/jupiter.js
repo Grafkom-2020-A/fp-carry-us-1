@@ -8,9 +8,8 @@ import { TextSprites } from './utils/TextSprites.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();
-let camera = new Camera(scene);
+let camera = new Camera(false);
 let background = new Background(scene, renderer);
-let spaceship = new Spaceship(scene, camera);
 
 let jupiter = new Planet('../../assets/space_objects/Jupiter.glb');
 
@@ -53,7 +52,7 @@ setTimeout(function()
   scene.add(jupiter.getBody())
   // revMars.add(moon.getBody())
   scene.add(revJupiter)
-}, 1000)
+}, 2000)
 
 /***************** END GROUP ***************/
 
@@ -63,8 +62,8 @@ window.addEventListener('resize', function(){
   camera.camera.updateProjectionMatrix()
 })
 
-spaceship.render();
-camera.render();
+camera.setPosition(2000, 0, 0);
+camera.setLookAt(0, 0, 0);
 
 var animate = function ()
 {
