@@ -12,11 +12,15 @@ let camera = new Camera(false);
 let background = new Background(scene, renderer);
 
 let saturn = new Planet('../../assets/space_objects/Saturn.glb');
+let titan = new Planet('../../assets/space_objects/Titan.glb');
 
 setInterval(function(){ 
+  saturn.body.rotation.x = 0.1
   saturn.setPosition(0, 0, 0)
   saturn.setSize(1)
-  saturn.body.rotation.x = 0.1
+
+  titan.setPosition(0, 100, 1500)
+  titan.setSize(0.1)
 }, 1000)
 
 //------------------Text Sprite---------------------//
@@ -62,7 +66,7 @@ var revSaturn = new THREE.Group()
 setTimeout(function()
 {
   scene.add(saturn.getBody())
-  // revsaturn.add(moon.getBody())
+  revSaturn.add(titan.getBody())
   scene.add(revSaturn)
 }, 1000)
 
@@ -83,9 +87,9 @@ var animate = function ()
 
   saturn.animate()
   // console.log(spaceship.getPosition())
-  revSaturn.rotation.x += 0.01
-  revSaturn.rotation.y += 0.05
-  // revsaturn.rotation.z += 0.005
+  revSaturn.rotation.x = 0.5
+  revSaturn.rotation.y += 0.009
+  // revSaturn.rotation.z += 0.005
   // saturn.getBody().rotation.x = 0
   // saturn.getBody().rotation.y += 0.01
 

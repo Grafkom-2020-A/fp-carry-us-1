@@ -13,9 +13,27 @@ let background = new Background(scene, renderer);
 
 let jupiter = new Planet('../../assets/space_objects/Jupiter.glb');
 
+let Callisto = new Planet('../../assets/space_objects/Callisto.glb');
+let Europa = new Planet('../../assets/space_objects/Europa.glb');
+let Ganymede = new Planet('../../assets/space_objects/Ganymede.glb');
+let Io = new Planet('../../assets/space_objects/Io.glb');
+
+
 setInterval(function(){ 
   jupiter.setPosition(0, 0, 0)
   jupiter.setSize(1.5)
+
+  Callisto.setPosition(0, 100, 1000)
+  Callisto.setSize(0.1)
+
+  Europa.setPosition(0, 200, 1500)
+  Europa.setSize(0.1)
+
+  Ganymede.setPosition(0, 300, 1250)
+  Ganymede.setSize(0.1)
+
+  Io.setPosition(0, 400, 1000)
+  Io.setSize(0.1)
 }, 1000)
 
 //------------------Text Sprite---------------------//
@@ -58,13 +76,22 @@ scene.add(light2,pointLightHelper);
 var controls = new OrbitControls(camera.camera, renderer.domElement)
 
 //----------------- GROUP ------------//
-var revJupiter = new THREE.Group()
+var revCal = new THREE.Group()
+var revEu = new THREE.Group()
+var revGan = new THREE.Group()
+var revIo = new THREE.Group()
 
 setTimeout(function()
 {
   scene.add(jupiter.getBody())
-  // revMars.add(moon.getBody())
-  scene.add(revJupiter)
+  revCal.add(Callisto.getBody())
+  revEu.add(Europa.getBody())
+  revGan.add(Ganymede.getBody())
+  revIo.add(Io.getBody())
+  scene.add(revCal)
+  scene.add(revEu)
+  scene.add(revGan)
+  scene.add(revIo)
 }, 2000)
 
 /***************** END GROUP ***************/
@@ -83,9 +110,24 @@ var animate = function ()
   requestAnimationFrame( animate );
 
   jupiter.animate()
+  Callisto.animate()
+  Europa.animate()
+  Ganymede.animate()
+  Io.animate()
   // console.log(spaceship.getPosition())
-  revJupiter.rotation.x += 0.01
-  revJupiter.rotation.y += 0.05
+  revCal.rotation.x = -0.1
+  revCal.rotation.y += 0.0005
+
+  revEu.rotation.x = 0.2
+  revEu.rotation.y += 0.0015
+
+  revGan.rotation.x = 0.3
+  revGan.rotation.y += 0.0025
+
+  revIo.rotation.x = 0.4
+  revIo.rotation.y += 0.0035
+
+
   // revMars.rotation.z += 0.005
   // mars.getBody().rotation.x = 0
   // mars.getBody().rotation.y += 0.01
