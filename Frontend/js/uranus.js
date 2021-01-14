@@ -4,6 +4,7 @@ import { Background } from './utils/Background.js';
 import { Camera } from './utils/Camera.js';
 import { Spaceship } from './model/Spaceship.js';
 import { Planet } from './model/Planet.js';
+import { API } from './utils/Api.js';
 
 let scene = new THREE.Scene();
 let renderer = new THREE.WebGLRenderer();

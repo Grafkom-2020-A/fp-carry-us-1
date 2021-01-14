@@ -10,3 +10,5 @@ API.fetchAPI = function (planetName, callback) {
         console.log(error);
     });
 }
+
+export { API };
