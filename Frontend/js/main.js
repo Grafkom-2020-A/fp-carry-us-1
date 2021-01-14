@@ -29,7 +29,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFDFBD3, 2, 0, 1);
+var light2 = new THREE.PointLight(0xFDFBD3, 3.2, 0, 2);
 light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
@@ -103,19 +103,19 @@ let intervalId = setInterval(() => {
   mars.setPosition(-3500, 0, 0)
   mars.setSize(0.1)
 
-  jupiter.setPosition(-5000, 0, 0)
+  jupiter.setPosition(-7000, 0, 0)
   jupiter.setSize(0.75)
 
-  saturnus.setPosition(-6500, 0, 0)
+  saturnus.setPosition(-9500, 0, 0)
   saturnus.setSize(0.65)
 
-  uranus.setPosition(-7000, 0, 0)
+  uranus.setPosition(-11000, 0, 0)
   uranus.setSize(0.3)
 
-  neptunus.setPosition(-8000, 0, 0)
+  neptunus.setPosition(-13000, 0, 0)
   neptunus.setSize(0.3)
 
-  pluto.setPosition(-9000, 0, 0)
+  pluto.setPosition(-15000, 0, 0)
   pluto.setSize(0.1)
 
   if(isAllLoaded) {
