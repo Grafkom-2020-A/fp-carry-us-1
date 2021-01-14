@@ -22,10 +22,23 @@ setInterval(function(){
 var defaultWidthForText = 450;
 var canvasMinSize = 300;
 var textMultiplier = 1.2;
-var spritey = TextSprites.makeTextSprite( " SUN \n is \n not \n cold \n at all ", 
-{ fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
-spritey.position.set(1000,0,900);
-scene.add( spritey );
+var text = ""
+var xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4) {
+    var resp = JSON.parse(xhr.responseText);
+    text = resp['msg'];
+    console.log(text)
+    var spritey = TextSprites.makeTextSprite( text, 
+    { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
+    spritey.position.set(1000,0,900);
+    scene.add( spritey );
+  }
+}
+
+xhr.open('GET', "http://kerupuksambel.com:6900/object/sun", true);
+xhr.send('');
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);

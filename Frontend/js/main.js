@@ -13,7 +13,7 @@ let spaceship = new Spaceship(scene, camera);
 let sun = new Planet('../../assets/space_objects/Sun.glb', "sun");
 let mercury = new Planet('../../assets/space_objects/Mercury.glb', "mercury");
 let venus = new Planet('../../assets/space_objects/Venus.glb', "venus");
-let earth = new Planet('../../assets/space_objects/Earth.glb', "earth");
+let earth = new Planet('../../assets/space_objects/EarthClouds.glb', "earth");
 let mars = new Planet('../../assets/space_objects/Mars.glb', "mars");
 let jupiter = new Planet('../../assets/space_objects/Jupiter.glb', "jupiter");
 let saturnus = new Planet('../../assets/space_objects/Saturn.glb', "saturnus");
@@ -29,7 +29,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFFFFF, 1, 0, 100);
+var light2 = new THREE.PointLight(0xFDFBD3, 2, 0, 1);
 light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 

@@ -12,7 +12,7 @@ let renderer = new THREE.WebGLRenderer();
 let camera = new Camera(false);
 let background = new Background(scene, renderer);
 
-let earth = new Planet('../../assets/space_objects/Earth.glb');
+let earth = new Planet('../../assets/space_objects/EarthClouds.glb');
 let moon = new Planet('../../assets/space_objects/Moon.glb');
 
 setInterval(function(){ 
@@ -27,10 +27,24 @@ setInterval(function(){
 var defaultWidthForText = 450;
 var canvasMinSize = 300;
 var textMultiplier = 1.2;
-var spritey = TextSprites.makeTextSprite( " EARTH \n is \n not \n a \n battlefield ", 
-{ fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
-spritey.position.set(1000,0,900);
-scene.add( spritey );
+
+var text = ""
+var xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4) {
+    var resp = JSON.parse(xhr.responseText);
+    text = resp['msg'];
+    console.log(text)
+    var spritey = TextSprites.makeTextSprite( text, 
+    { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
+    spritey.position.set(1000,0,900);
+    scene.add( spritey );
+  }
+}
+
+xhr.open('GET', "http://kerupuksambel.com:6900/object/earth", true);
+xhr.send('');
 
 /**************** End Text Sprite *****************/
 
@@ -41,7 +55,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFD8C0, 15, 0, 2);
+var light2 = new THREE.PointLight(0xFFD8C0, 10, 0, 2);
 light2.position.set(0, 5500, 7050)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
@@ -77,8 +91,8 @@ var animate = function ()
   earth.animate()
   moon.animate()
   // console.log(spaceship.getPosition())
-  revEarth.rotation.x += 0.01
-  revEarth.rotation.y += 0.05
+  revEarth.rotation.x = 0.3
+  revEarth.rotation.y += 0.01
   // revEarth.rotation.z += 0.005
   // earth.getBody().rotation.x = 0
   // earth.getBody().rotation.y += 0.01
