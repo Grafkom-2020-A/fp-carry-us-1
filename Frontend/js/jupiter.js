@@ -31,10 +31,10 @@ xhr.onreadystatechange = function() {
     var resp = JSON.parse(xhr.responseText);
     text = resp['msg'];
     console.log(text)
-    // var spritey = makeTextSprite( text, 
-    // { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
-    // spritey.position.set(1000,0,900);
-    // scene.add( spritey );
+    var spritey = TextSprites.makeTextSprite( text, 
+    { fontsize: 16, fontface: "Arial", borderColor: {r:0, g:162, b:221, a:1.0} } );
+    spritey.position.set(1000,0,900);
+    scene.add( spritey );
   }
 }
 
