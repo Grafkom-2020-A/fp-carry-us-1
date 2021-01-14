@@ -83,11 +83,12 @@ var animate = function ()
 
   uranus.animate()
   // console.log(spaceship.getPosition())
-  revUranus.rotation.x += 0.01
-  revUranus.rotation.y += 0.05
-  // revuranus.rotation.z += 0.005
-  // uranus.getBody().rotation.x = 0
-  // uranus.getBody().rotation.y += 0.01
+  // revUranus.rotation.x += 0.05
+  //revUranus.rotation.y += 0.05
+  // revUranus.rotation.z += 0.5
+  uranus.getBody().rotation.x = Math.PI / 2
+  uranus.getBody().rotation.y = 0
+  uranus.getBody().rotation.z += 0.001
 
   renderer.render( scene, camera.camera );
 };
