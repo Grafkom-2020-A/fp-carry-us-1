@@ -136,7 +136,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFD8C0, 15, 0, 2);
+var light2 = new THREE.PointLight(0xFFD8C0, 10, 0, 2);
 light2.position.set(0, 5500, 7050)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 
@@ -172,8 +172,8 @@ var animate = function ()
   earth.animate()
   moon.animate()
   // console.log(spaceship.getPosition())
-  revEarth.rotation.x += 0.01
-  revEarth.rotation.y += 0.05
+  revEarth.rotation.x = 0.3
+  revEarth.rotation.y += 0.01
   // revEarth.rotation.z += 0.005
   // earth.getBody().rotation.x = 0
   // earth.getBody().rotation.y += 0.01

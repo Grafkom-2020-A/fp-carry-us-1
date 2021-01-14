@@ -29,7 +29,7 @@ document.body.appendChild(renderer.domElement);
 var ambient = new THREE.AmbientLight( 0x404040)
 scene.add(ambient)
 
-var light2 = new THREE.PointLight(0xFFFFFF, 1, 0, 100);
+var light2 = new THREE.PointLight(0xFDFBD3, 2, 0, 1);
 light2.position.set(0, 0, 0)
 var pointLightHelper = new THREE.PointLightHelper( light2 );
 

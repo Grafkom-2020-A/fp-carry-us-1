@@ -73,7 +73,7 @@ class Camera {
         document.addEventListener('keydown', function(e) {
             if (e.key == 'f' || e.key == 'F') this.toggleFullscreen();
             if (e.key == 'h' || e.key == 'H') this.showControls();
-            if (e.key == 'i' || e.key == 'I' && this.informationShowed) this.goToPlanet();
+            if ((e.key == 'i' || e.key == 'I') && this.informationShowed) this.goToPlanet();
         }.bind(this));
 
         document.addEventListener('keyup', function(e) {
