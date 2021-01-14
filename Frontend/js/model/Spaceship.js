@@ -40,8 +40,10 @@ class Spaceship {
     }
 
     initCamera() {
-        this.camera.camera.position.z = this.body.position.z - 1250;
-        this.camera.camera.position.y = this.body.position.y + 100;
+        //this.camera.camera.position.z = this.body.position.z - 1250;
+        this.camera.camera.position.z = this.body.position.z - 1300;
+        // this.camera.camera.position.y = this.body.position.y + 100;
+        this.camera.camera.position.y = this.body.position.y + 60;
         // this.camera.camera.position.x = this.body.position.x - 100;
         this.body.add(this.camera.camera);
         this.camera.camera.lookAt(this.body.position);
@@ -103,6 +105,7 @@ class Spaceship {
             let vertical = 0;
             let horizontal = 0;
             let boost = 0;
+
             switch (e.keyCode) {
                 case 65: // A
                     horizontal = this.X_ROTATION;
