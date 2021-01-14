@@ -13,7 +13,7 @@ let camera = new Camera(scene);
 let background = new Background(scene, renderer);
 let spaceship = new Spaceship(scene, camera);
 
-let earth = new Planet('../../assets/space_objects/Earth.glb');
+let earth = new Planet('../../assets/space_objects/EarthClouds.glb');
 let moon = new Planet('../../assets/space_objects/Moon.glb');
 
 setInterval(function(){ 
