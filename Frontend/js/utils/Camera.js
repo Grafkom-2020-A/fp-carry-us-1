@@ -3,7 +3,7 @@ import { THREEx } from '../lib/THREEx.FullScreen.js';
 
 class Camera {
     constructor() {
-        this.camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 500000 );
+        this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 500000 );
         this.DELTA_FROM_PLANE = 300;
         this.Y_FROM_PLANE = 100;
         this.informationShowed = false;
@@ -71,13 +71,13 @@ class Camera {
 
     render() {
         document.addEventListener('keydown', function(e) {
-            if (e.key == 'f') this.toggleFullscreen();
-            if (e.key == 'h') this.showControls();
-            if (e.key == 'i' && this.informationShowed) this.goToPlanet();
+            if (e.key == 'f' || e.key == 'F') this.toggleFullscreen();
+            if (e.key == 'h' || e.key == 'H') this.showControls();
+            if (e.key == 'i' || e.key == 'I' && this.informationShowed) this.goToPlanet();
         }.bind(this));
 
         document.addEventListener('keyup', function(e) {
-            if (e.key == 'h') this.hideControls();
+            if (e.key == 'h' || e.key == 'H') this.hideControls();
         }.bind(this));
     }
 }
